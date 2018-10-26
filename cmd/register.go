@@ -19,15 +19,22 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		username,_:=cmd.Flags().GetString("user")
+		username,_:=cmd.Flags().GetString("username")
+		password,_:=cmd.Flags().GetString("password")
+		email,_:=cmd.Flags().GetString("email")
+		phonenumber,_:=cmd.Flags().GetString("phonenumber")
 	//查看本账户是否已经被注册过
-		fmt.Println("register called by"+username)
+		fmt.Println("register called by"+username+password+email+phonenumber)
+
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(registerCmd)
-	registerCmd.Flags().StringP("user","u","Anonymous", "Helpmessagefor UserName")
+	registerCmd.Flags().StringP("username","u","Anonymous", "新用户名")
+	registerCmd.Flags().StringP("password","p","admin", "新用户密码")
+	registerCmd.Flags().StringP("email","e","", "新用户邮箱")
+	registerCmd.Flags().StringP("phonenumber","pn","", "新用户电话号码")
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command
