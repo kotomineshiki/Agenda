@@ -11,6 +11,8 @@ import (
 	"os"
 	"path/filepath"
 )
+type UserFilter func (*User) bool
+type MeetingFilter func (*Meeting) bool
 var userinfoPath = "/src/agenda/data/userinfo"
 var metinfoPath = "/src/agenda/data/meetinginfo"
 var curUserPath = "/src/agenda/data/curUser.txt"
@@ -177,4 +179,15 @@ func readMeeting() error {
 		errLog.Println("Decode Met Fail:", err)
 		return err
 	}
+}
+
+
+func QueryUser(filter UserFilter) []User {
+	var user []User
+	for _, v := range userData {
+		if filter(&v) {
+			user = append(user, v)
+		}
+	}
+	return user
 }

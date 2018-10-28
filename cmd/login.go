@@ -18,7 +18,7 @@ var loginCmd = &cobra.Command{
 		username,_:=cmd.Flags().GetString("username")
 		password,_:=cmd.Flags().GetString("password")
 		fmt.Println("login called"+username+" "+password)
-		login()
+		login(username, password)
 	},
 }
 
@@ -36,6 +36,6 @@ func init() {
 	// is called directly, e.g.:
 	// loginCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
-func login(){
+func login(username string, password string){
 
 }
