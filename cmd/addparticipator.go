@@ -25,8 +25,9 @@ import (
 var addparticipatorCmd = &cobra.Command{
 	Use:   "addparticipator",
 	Short: "add participators",
-	Long:  `add participators to a meeting by meeting's name`,
-	Args:  cobra.MinimumNArgs(0),
+	Long: `add participators to a meeting by meeting's name ,just like:
+	agenda addparticipator -t meetingtitle -p "a, b"`,
+	Args: cobra.MinimumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 		username, _ := cmd.Flags().GetStringSlice("participator")
 		meetingtitle, _ := cmd.Flags().GetString("title")
@@ -34,7 +35,7 @@ var addparticipatorCmd = &cobra.Command{
 			fmt.Println("Please input title and participator(s)(input like \"name1, name2\")")
 			return
 		}
-		fmt.Println("addparticipator called")
+		//fmt.Println("addparticipator called")
 		if user, flag := service.GetCurUser(); flag != true {
 			fmt.Println("Please login firstly")
 		} else {
