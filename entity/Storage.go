@@ -1,8 +1,8 @@
 package entity
 
 import (
-	"agenda/deepcopy"
-	"agenda/loghelper"
+	"Agenda/deepcopy"
+	"Agenda/loghelper"
 	"bufio"
 	"encoding/json"
 	"errors"
@@ -11,19 +11,21 @@ import (
 	"os"
 	"path/filepath"
 )
-type UserFilter func (*User) bool
-type MeetingFilter func (*Meeting) bool
-var userinfoPath = "/src/agenda/data/userinfo"
-var metinfoPath = "/src/agenda/data/meetinginfo"
-var curUserPath = "/src/agenda/data/curUser.txt"
+
+type UserFilter func(*User) bool
+type MeetingFilter func(*Meeting) bool
+
+var userinfoPath = "/src/Agenda/data/userinfo"
+var metinfoPath = "/src/Agenda/data/meetinginfo"
+var curUserPath = "/src/Agenda/data/curUser.txt"
 var curUserName *string
-var dirty bool//标记脏位
-var userData []User//用来存用户信息
+var dirty bool      //标记脏位
+var userData []User //用来存用户信息
 var meetingData []Meeting
 var errLog *log.Logger
 
-func init()  {
-	//errLog = loghelper.Error
+func init() {
+	errLog = loghelper.Error
 	dirty = false
 
 	userinfoPath = filepath.Join(loghelper.GoPath, userinfoPath)
@@ -31,7 +33,6 @@ func init()  {
 	metinfoPath = filepath.Join(loghelper.GoPath, metinfoPath)
 
 	curUserPath = filepath.Join(loghelper.GoPath, curUserPath)
-
 
 }
 
@@ -128,7 +129,7 @@ func readString(path string) (*string, error) {
 	}
 	defer file.Close()
 	reader := bufio.NewReader(file)
-	str, err := reader.ReadString('\n');
+	str, err := reader.ReadString('\n')
 	if err != nil && err != io.EOF {
 		loghelper.Error.Println("Read file fail:", path)
 		return nil, err
@@ -136,7 +137,7 @@ func readString(path string) (*string, error) {
 	return &str, nil
 }
 func writeJSON(fpath string, data interface{}) error {
-	file, err := os.Create(fpath);
+	file, err := os.Create(fpath)
 	if err != nil {
 		return err
 	}
@@ -149,7 +150,7 @@ func writeJSON(fpath string, data interface{}) error {
 	return nil
 }
 func readUser() error {
-	file, err := os.Open(userinfoPath);
+	file, err := os.Open(userinfoPath)
 	if err != nil {
 		errLog.Println("Open File Fail:", userinfoPath, err)
 		return err
@@ -165,7 +166,7 @@ func readUser() error {
 	}
 }
 func readMeeting() error {
-	file, err := os.Open(metinfoPath);
+	file, err := os.Open(metinfoPath)
 	if err != nil {
 		errLog.Println("Open File Fail:", metinfoPath, err)
 		return err
@@ -180,7 +181,6 @@ func readMeeting() error {
 		return err
 	}
 }
-
 
 func QueryUser(filter UserFilter) []User {
 	var user []User

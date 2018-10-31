@@ -1,17 +1,19 @@
 //!!copy
 package loghelper
+
 import (
 	"io"
 	//"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
-	"strings"
 	"runtime"
+	"strings"
 )
+
 var (
 	// Info : Discard
-	Info    *log.Logger
+	Info *log.Logger
 
 	// Warning : Stdout
 
@@ -19,23 +21,14 @@ var (
 
 	// Error : Stderr
 
-	Error   *log.Logger
-
-
+	Error *log.Logger
 
 	// GoPath : GoPath
 
 	GoPath string
-
-
-
 )
 
-
-
 var errlog, infolog *os.File
-
-
 
 func set(
 
@@ -45,23 +38,17 @@ func set(
 
 	errorHandle io.Writer) {
 
-
-
 	Info = log.New(infoHandle,
 
 		"INFO: ",
 
 		log.Ldate|log.Ltime|log.Lshortfile)
 
-
-
 	Warning = log.New(warningHandle,
 
 		"WARNING: ",
 
 		log.Ldate|log.Ltime|log.Lshortfile)
-
-
 
 	Error = log.New(errorHandle,
 
@@ -70,8 +57,6 @@ func set(
 		log.Ldate|log.Ltime|log.Lshortfile)
 
 }
-
-
 
 func init() {
 
@@ -87,15 +72,11 @@ func init() {
 
 	}
 
+	infolog = getLogFile("/src/Agenda/data/info.log")
 
-
-	infolog = getLogFile("/src/agenda-go-cli/data/info.log")
-
-	errlog = getLogFile("/src/agenda-go-cli/data/error.log")
+	errlog = getLogFile("/src/Agenda/data/error.log")
 
 	set(infolog, os.Stdout, errlog)
-
-
 
 	Info.Println("Start up Info log")
 
@@ -105,24 +86,23 @@ func init() {
 
 }
 
-
-
 // Free : close log file
 
-func Free()  {
+func Free() {
 	errlog.Close()
 	infolog.Close()
 }
 
-func getLogFile(path string) *os.File  {
+func getLogFile(path string) *os.File {
 	logPath := filepath.Join(GoPath, path)
 	file, err := os.OpenFile(logPath, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	if err != nil {
 		log.Fatalf("file open error : %v\n", err)
 	}
-	return file;
+	return file
 	// defer file.Close()
 }
+
 // GetGOPATH : get GOPATH
 
 func GetGOPATH() *string {
@@ -134,7 +114,7 @@ func GetGOPATH() *string {
 	}
 	goPath := strings.Split(os.Getenv("GOPATH"), sp)
 	for _, v := range goPath {
-		if _, err := os.Stat(filepath.Join(v, "/src/agenda-go-cli/data/meetinginfo")); !os.IsNotExist(err) {
+		if _, err := os.Stat(filepath.Join(v, "/src/Agenda/data/meetinginfo")); !os.IsNotExist(err) {
 			return &v
 		}
 	}

@@ -1,18 +1,18 @@
 package service
 
 import (
-
-	"agenda/entity"
-
-	"agenda/loghelper"
-
+	"Agenda/entity"
+	"Agenda/loghelper"
 	"log"
-
 )
-var curuserinfoPath = "/src/agenda-go-cli/data/curuser.txt"
+
+var curuserinfoPath = "/src/Agenda/data/curuser.txt"
+
 var errLog *log.Logger
+
 type User entity.User
 type Meeting entity.Meeting
+
 func init() {
 
 	errLog = loghelper.Error
@@ -20,9 +20,9 @@ func init() {
 }
 func UserRegister(username string, password string, email string, phone string) (bool, error) {
 
-	user := entity.QueryUser(func (u *entity.User) bool {
+	user := entity.QueryUser(func(u *entity.User) bool {
 
-		return u.meeting_name == username
+		return u.GetName() == username
 
 	})
 
