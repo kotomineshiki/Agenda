@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 INFO: 2018/10/31 10:31:08 log.go:81: Start up Info log
 INFO: 2018/10/31 10:31:38 log.go:81: Start up Info log
 INFO: 2018/10/31 10:31:58 log.go:81: Start up Info log
@@ -38,3 +39,5 @@ INFO: 2018/11/01 01:14:41 log.go:81: Start up Info log
 INFO: 2018/11/01 01:15:08 log.go:81: Start up Info log
 INFO: 2018/11/01 01:33:53 log.go:81: Start up Info log
 INFO: 2018/11/01 01:34:29 log.go:81: Start up Info log
+=======
+>>>>>>> 803333889b03ec9281d3ef31e6b69bb55b65ece5

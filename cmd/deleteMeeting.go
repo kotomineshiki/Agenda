@@ -2,6 +2,7 @@
 package cmd
 
 import (
+	"Agenda/service"
 	"fmt"
 
 	"github.com/spf13/cobra"
@@ -19,8 +20,19 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		title, _ := cmd.Flags().GetString("Title")
-		fmt.Println("deleteMeeting called"+title)
+		fmt.Println("deleteMeeting called" + title)
 		//查看该Meeting是否存在
+		user, flag := service.GetCurUser()
+		if flag != true {
+			fmt.Println("Please Log in firstly")
+			return
+		}
+		if service.DeleteMeeting(user.M_name, title) {
+			fmt.Println("[delete meeting] succeed!")
+		} else {
+			fmt.Println("[error] delete meeting fail!")
+		}
+
 	},
 }
 

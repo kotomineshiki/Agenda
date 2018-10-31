@@ -3,6 +3,7 @@
 package cmd
 
 import (
+	"Agenda/service"
 	"fmt"
 
 	"github.com/spf13/cobra"
@@ -15,6 +16,16 @@ var logoutCmd = &cobra.Command{
 	Long:  `使用此指令可以退出当前账户`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("logout called")
+		_, flag := service.GetCurUser()
+		if flag != true {
+			fmt.Println("Please Log in firstly")
+			return
+		}
+		if service.UserLogout() {
+			fmt.Println("[log out] succeed!")
+		} else {
+			fmt.Println("[log out] wrong!")
+		}
 	},
 }
 
