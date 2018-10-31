@@ -15,6 +15,7 @@
 package cmd
 
 import (
+	"Agenda/service"
 	"fmt"
 
 	"github.com/spf13/cobra"
@@ -31,20 +32,29 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
+		title, _ := cmd.Flags().GetString("title")
+		participator, _ := cmd.Flags().GetStringSlice("participator")
 		fmt.Println("removeparticipator called")
+		if title == "" || len(participator) == 0 {
+			fmt.Println("Please input title and participator(s)(input like \"name1, name2\")")
+			return
+		}
+		if user, flag := service.GetCurUser(); flag != true {
+			fmt.Println("Please login firstly")
+		} else {
+			// participators := strings.Split(tmp_p, ",")
+			if service.RemoveMeetingParticipator(user.M_name, title, participator) {
+				fmt.Println("[remove participator] succeed!")
+			} else {
+				fmt.Println("[remove participator] error!. Check error.log for detail")
+			}
+		}
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(removeparticipatorCmd)
+	removeparticipatorCmd.Flags().StringP("title", "t", "", "the title of the meeting")
+	removeparticipatorCmd.Flags().StringSliceP("participator", "p", nil, "the participator(s) of the meeting, input like \"name1, name2\"")
 
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// removeparticipatorCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// removeparticipatorCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

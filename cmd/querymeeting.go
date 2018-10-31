@@ -15,6 +15,8 @@
 package cmd
 
 import (
+	"Agenda/entity"
+	"Agenda/service"
 	"fmt"
 
 	"github.com/spf13/cobra"
@@ -32,12 +34,44 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("querymeeting called")
+		starttime, _ := cmd.Flags().GetString("starttime")
+		endtime, _ := cmd.Flags().GetString("endtime")
+		if starttime == "" || endtime == "" {
+			fmt.Println("querymeeting -s [starttime] -e [endtime]")
+			return
+		}
+		user, flag := service.GetCurUser()
+		if flag != true {
+			fmt.Println("Please Log in firstly")
+			return
+		}
+		temp_mets, flag := service.QueryMeeting(user.M_name, starttime, endtime)
+		fmt.Println(len(temp_mets))
+		if flag == true {
+			for _, m := range temp_mets {
+				fmt.Println("----------------")
+				fmt.Println("Title: ", m.M_title)
+				ts, _ := entity.DateToString(m.M_startDate)
+				fmt.Println("Start Time", ts)
+				te, _ := entity.DateToString(m.M_endDate)
+				fmt.Println("End Time", te)
+				fmt.Printf("Participator(s): ")
+				for _, p := range m.M_participators {
+					fmt.Printf(p, " ")
+				}
+				fmt.Printf("\n")
+				fmt.Println("----------------")
+			}
+		} else {
+			fmt.Println("Wrong Date!please input the date as yyyy-mm-dd/hh:mm and make sure that starttiem <= endtime")
+		}
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(querymeetingCmd)
-
+	querymeetingCmd.Flags().StringP("starttime", "s", "", "starttime of time interval")
+	querymeetingCmd.Flags().StringP("endtime", "e", "", "endtime of time interval")
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command

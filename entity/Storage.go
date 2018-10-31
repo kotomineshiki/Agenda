@@ -6,6 +6,7 @@ import (
 	"bufio"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"log"
 	"os"
@@ -38,10 +39,12 @@ func init() {
 }
 
 func Logout() error {
-
-	curUserName = nil
-
-	return Sync()
+	if *curUserName != "" {
+		curUserName = nil
+		return Sync()
+	} else {
+		return errors.New("No curUserName!")
+	}
 
 }
 func Sync() error {
@@ -225,6 +228,7 @@ func DeleteUser(filter UserFilter) int {
 }
 func CreateMeeting(v *Meeting) {
 	meetingData = append(meetingData, deepcopy.Copy(*v).(Meeting))
+	fmt.Println(DateToString(meetingData[1].M_endDate))
 	dirty = true
 }
 func QueryMeeting(filter MeetingFilter) []Meeting {

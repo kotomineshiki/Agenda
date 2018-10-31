@@ -3,6 +3,7 @@
 package cmd
 
 import (
+	"Agenda/service"
 	"fmt"
 
 	"github.com/spf13/cobra"
@@ -12,23 +13,28 @@ import (
 var createMeetingCmd = &cobra.Command{
 	Use:   "createMeeting -t [Title] -p [Participator] -s [StartTime] -e [EndTime]",
 	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-
 		title, _ := cmd.Flags().GetString("Title")
-
 		participators, _ := cmd.Flags().GetStringSlice("Participator")
-
 		startTime, _ := cmd.Flags().GetString("StartTime")
-
 		endTime, _ := cmd.Flags().GetString("EndTime")
-		fmt.Println("createMeeting called"+title+participators[0]+startTime+endTime)
+		if title == "" || len(participators) == 0 || startTime == "" || endTime == "" {
+			fmt.Println("createMeeting -t [Title] -p [Participator] -s [StartTime] -e [EndTime]")
+			return
+		}
+		fmt.Println("createMeeting called" + title + startTime + endTime)
 		//判断是否合法
+		user, flag := service.GetCurUser()
+		if flag != true {
+			fmt.Println("Error: please login firstly")
+			return
+		}
+		if service.CreateMeeting(user.M_name, title, startTime, endTime, participators) {
+			fmt.Println("[create meeting] succeed!")
+			return
+		} else {
+			fmt.Println("[create meeting] error!")
+		}
 	},
 }
 
@@ -36,11 +42,8 @@ func init() {
 	rootCmd.AddCommand(createMeetingCmd)
 
 	createMeetingCmd.Flags().StringP("Title", "t", "", "meeting title")
-
-	createMeetingCmd.Flags().StringSliceP("Participator", "p", []string{}, "meeting's participator")
-
+	createMeetingCmd.Flags().StringSliceP("Participator", "p", nil, "meeting's participator")
 	createMeetingCmd.Flags().StringP("StartTime", "s", "", "meeting's startTime")
-
 	createMeetingCmd.Flags().StringP("EndTime", "e", "", "meeting's endTime")
 	// Here you will define your flags and configuration settings.
 

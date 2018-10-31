@@ -15,6 +15,7 @@
 package cmd
 
 import (
+	"Agenda/service"
 	"fmt"
 
 	"github.com/spf13/cobra"
@@ -31,13 +32,28 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
+		title, _ := cmd.Flags().GetString("title")
 		fmt.Println("quitmeeting called")
+		if title == "" {
+			fmt.Println("Please input title[-t]")
+			return
+		}
+		user, flag := service.GetCurUser()
+		if flag != true {
+			fmt.Println("Please login firstly")
+		} else {
+			if service.QuitMeeting(user.M_name, title) {
+				fmt.Println("[quit meeting] succeed!")
+			} else {
+				fmt.Println("[quit meeting] error!")
+			}
+		}
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(quitmeetingCmd)
-
+	quitmeetingCmd.Flags().StringP("title", "t", "", "the title of the meeting")
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command

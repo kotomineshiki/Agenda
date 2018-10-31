@@ -224,10 +224,18 @@ func QueryMeeting(username, startDate, endDate string) ([]entity.Meeting, bool) 
 	return tm, true
 }
 
-func DeleteMeeting(username, title string) int {
-	return entity.DeleteMeeting(func(m *entity.Meeting) bool {
+func DeleteMeeting(username, title string) bool {
+	ml := entity.DeleteMeeting(func(m *entity.Meeting) bool {
 		return m.M_sponsor == username && m.M_title == title
 	})
+	if ml > 0 {
+		if err := entity.Sync(); err != nil {
+			return false
+		}
+		return true
+	} else {
+		return false
+	}
 }
 
 func QuitMeeting(username string, title string) bool {
