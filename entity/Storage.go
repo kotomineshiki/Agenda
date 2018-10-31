@@ -50,12 +50,6 @@ func Sync() error {
 	}
 	return nil
 }
-
-func CreateUser(tocreate *User) {
-	userData = append(userData, deepcopy.Copy(*tocreate).(User))
-	dirty = true
-
-}
 func writeToFile() error {
 	var e []error
 	if err := writeString(curUserPath, curUserName); err != nil {
@@ -101,6 +95,19 @@ func readFromFile() error {
 	}
 	return er
 }
+func writeJSON(fpath string, data interface{}) error {
+	file, err := os.Create(fpath)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+	enc := json.NewEncoder(file)
+	if err := enc.Encode(&data); err != nil {
+		errLog.Println("writeJSON:", err)
+		return err
+	}
+	return nil
+}
 func writeString(path string, data *string) error {
 	file, err := os.Create(path)
 	if err != nil {
@@ -136,19 +143,7 @@ func readString(path string) (*string, error) {
 	}
 	return &str, nil
 }
-func writeJSON(fpath string, data interface{}) error {
-	file, err := os.Create(fpath)
-	if err != nil {
-		return err
-	}
-	defer file.Close()
-	enc := json.NewEncoder(file)
-	if err := enc.Encode(&data); err != nil {
-		errLog.Println("writeJSON:", err)
-		return err
-	}
-	return nil
-}
+
 func readUser() error {
 	file, err := os.Open(userinfoPath)
 	if err != nil {
@@ -182,6 +177,11 @@ func readMeeting() error {
 	}
 }
 
+func CreateUser(tocreate *User) {
+	userData = append(userData, deepcopy.Copy(*tocreate).(User))
+	dirty = true
+
+}
 func QueryUser(filter UserFilter) []User {
 	var user []User
 	for _, v := range userData {
@@ -190,4 +190,102 @@ func QueryUser(filter UserFilter) []User {
 		}
 	}
 	return user
+}
+func UpdateUser(filter UserFilter, switcher func(*User)) int {
+	count := 0
+	for i := 0; i < len(userData); i++ {
+		if v := &userData[i]; filter(v) {
+			switcher(v)
+			count++
+		}
+	}
+	if count > 0 {
+		dirty = true
+	}
+	return count
+}
+func DeleteUser(filter UserFilter) int {
+	count := 0
+	length := len(userData)
+	for i := 0; i < length; {
+		if filter(&userData[i]) {
+			length--
+			userData[i] = userData[length]
+			userData = userData[:length]
+			count++
+		} else {
+			i++
+		}
+	}
+	if count > 0 {
+		dirty = true
+	}
+	return count
+}
+func CreateMeeting(v *Meeting) {
+	meetingData = append(meetingData, deepcopy.Copy(*v).(Meeting))
+	dirty = true
+}
+func QueryMeeting(filter MeetingFilter) []Meeting {
+	var met []Meeting
+	for _, v := range meetingData {
+		if filter(&v) {
+			met = append(met, v)
+		}
+	}
+	return met
+}
+func UpdateMeeting(filter MeetingFilter, switcher func(*Meeting)) int {
+	count := 0
+	for i := 0; i < len(meetingData); i++ {
+		if v := &meetingData[i]; filter(v) {
+			switcher(v)
+			count++
+		}
+	}
+	if count > 0 {
+		dirty = true
+	}
+	return count
+}
+func DeleteMeeting(filter MeetingFilter) int {
+	count := 0
+	length := len(meetingData)
+	for i := 0; i < length; {
+		if filter(&meetingData[i]) {
+			length--
+			meetingData[i] = meetingData[length]
+			meetingData = meetingData[:length]
+			count++
+		} else {
+			i++
+		}
+	}
+	if count > 0 {
+		dirty = true
+	}
+	return count
+}
+func GetCurUser() (User, error) {
+	if curUserName == nil {
+		return User{}, errors.New("Current user does not exist")
+	}
+	for _, v := range userData {
+		if v.M_name == *curUserName {
+			return v, nil
+		}
+	}
+	return User{}, errors.New("Current user does not exist")
+}
+func SetCurUser(u *User) {
+	if u == nil {
+		curUserName = nil
+		return
+	}
+	if curUserName == nil {
+		p := u.M_name
+		curUserName = &p
+	} else {
+		*curUserName = u.M_name
+	}
 }

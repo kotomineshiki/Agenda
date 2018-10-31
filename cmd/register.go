@@ -20,13 +20,13 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		tmp_u, _ := cmd.Flags().GetString("username")
+		username, _ := cmd.Flags().GetString("username")
 		password, _ := cmd.Flags().GetString("password")
 		email, _ := cmd.Flags().GetString("email")
-		phonenumber, _ := cmd.Flags().GetString("phonenumber")
+		phonenumber, _ := cmd.Flags().GetString("telephone")
 		//查看本账户是否已经被注册过
-		fmt.Println("register called by " + tmp_u + password + email + phonenumber)
-		register(tmp_u, password, email, phonenumber)
+		fmt.Println("register called by " + username + password + email + phonenumber)
+		register(username, password, email, phonenumber)
 	},
 }
 
@@ -35,7 +35,7 @@ func init() {
 	registerCmd.Flags().StringP("username", "u", "", "新用户名")
 	registerCmd.Flags().StringP("password", "p", "", "新用户密码")
 	registerCmd.Flags().StringP("email", "e", "", "新用户邮箱")
-	registerCmd.Flags().StringP("phonenumber", "n", "", "新用户电话号码")
+	registerCmd.Flags().StringP("telephone", "t", "", "新用户电话号码")
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command
@@ -47,14 +47,20 @@ func init() {
 	// registerCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
 func register(username string, password string, email string, phonenumber string) {
-	if username == "" {
-		fmt.Println("必须输入用户名才能注册")
+	if username == "" || password == "" || email == "" || phonenumber == "" {
+		fmt.Println("Please tell us your username[-u], password[-p], email[-e], telephone[-t]")
+		return
 	}
-	if username == "" {
-		fmt.Println("该用户已经存在")
+	pass, err := service.UserRegister(username, password, email, phonenumber)
+	if pass == false {
+		fmt.Println("Username existed!")
+		return
+	} else {
+		if err != nil {
+			fmt.Println("Some unexpected error happened when try to record your info,Please read error.log for detail")
+			return
+		} else {
+			fmt.Println("Successfully register!")
+		}
 	}
-	if username == "" {
-		fmt.Println("密码不能为空")
-	}
-	service.UserRegister(username, password, email, phonenumber)
 }
