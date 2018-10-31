@@ -14,6 +14,7 @@ ERROR: 2018/10/31 15:59:38 log.go:85: Start up Error log
 ERROR: 2018/10/31 15:59:51 log.go:85: Start up Error log
 ERROR: 2018/10/31 15:59:51 agendaservice.go:45: Login: User not Exist
 ERROR: 2018/10/31 16:02:07 log.go:85: Start up Error log
+<<<<<<< HEAD
 ERROR: 2018/10/31 17:32:59 log.go:85: Start up Error log
 ERROR: 2018/10/31 17:33:03 log.go:85: Start up Error log
 ERROR: 2018/10/31 17:57:15 log.go:85: Start up Error log
@@ -77,3 +78,37 @@ ERROR: 2018/11/01 01:33:53 log.go:85: Start up Error log
 ERROR: 2018/11/01 01:34:02 log.go:85: Start up Error log
 ERROR: 2018/11/01 01:34:34 log.go:85: Start up Error log
 ERROR: 2018/11/01 01:34:46 log.go:85: Start up Error log
+=======
+ERROR: 2018/10/31 17:18:59 log.go:85: Start up Error log
+ERROR: 2018/10/31 17:19:23 log.go:85: Start up Error log
+ERROR: 2018/10/31 17:19:43 log.go:85: Start up Error log
+ERROR: 2018/10/31 17:20:13 log.go:85: Start up Error log
+ERROR: 2018/10/31 17:52:00 log.go:85: Start up Error log
+ERROR: 2018/10/31 17:52:39 log.go:85: Start up Error log
+ERROR: 2018/10/31 17:52:39 agendaservice.go:62: User Register: Already exist username
+ERROR: 2018/10/31 17:52:59 log.go:85: Start up Error log
+ERROR: 2018/11/01 00:51:05 log.go:85: Start up Error log
+ERROR: 2018/11/01 00:52:31 log.go:85: Start up Error log
+ERROR: 2018/11/01 00:53:42 log.go:85: Start up Error log
+ERROR: 2018/11/01 00:53:45 log.go:85: Start up Error log
+ERROR: 2018/11/01 00:54:03 log.go:85: Start up Error log
+ERROR: 2018/11/01 00:54:57 log.go:85: Start up Error log
+ERROR: 2018/11/01 00:55:56 log.go:85: Start up Error log
+ERROR: 2018/11/01 00:56:33 log.go:85: Start up Error log
+ERROR: 2018/11/01 00:57:27 log.go:85: Start up Error log
+ERROR: 2018/11/01 00:58:45 log.go:85: Start up Error log
+ERROR: 2018/11/01 01:00:04 log.go:85: Start up Error log
+ERROR: 2018/11/01 01:00:04 agendaservice.go:288: Add Meeting Participator: no such meeting
+ERROR: 2018/11/01 01:01:00 log.go:85: Start up Error log
+ERROR: 2018/11/01 01:01:10 log.go:85: Start up Error log
+ERROR: 2018/11/01 01:01:10 agendaservice.go:288: Add Meeting Participator: no such meeting
+ERROR: 2018/11/01 01:02:33 log.go:85: Start up Error log
+ERROR: 2018/11/01 01:02:33 agendaservice.go:288: Add Meeting Participator: no such meeting
+ERROR: 2018/11/01 01:05:18 log.go:85: Start up Error log
+ERROR: 2018/11/01 01:05:18 agendaservice.go:288: Add Meeting Participator: no such meeting
+ERROR: 2018/11/01 01:09:58 log.go:85: Start up Error log
+ERROR: 2018/11/01 01:09:58 agendaservice.go:288: Add Meeting Participator: no such meeting
+ERROR: 2018/11/01 01:14:41 log.go:85: Start up Error log
+ERROR: 2018/11/01 01:14:41 agendaservice.go:289: Add Meeting Participator: no such meeting
+ERROR: 2018/11/01 01:15:08 log.go:85: Start up Error log
+>>>>>>> 18af11f692b80bcf17f2ff163b7cf1950d870e20
