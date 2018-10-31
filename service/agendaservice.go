@@ -60,7 +60,7 @@ func UserRegister(username string, password string, email string, phone string) 
 
 	if len(user) == 1 {
 		errLog.Println("User Register: Already exist username")
-		return false,nil
+		return false, nil
 	}
 
 	entity.CreateUser(&entity.User{username, password, email, phone})

@@ -34,6 +34,7 @@ func init() {
 
 	curUserPath = filepath.Join(loghelper.GoPath, curUserPath)
 
+	readFromFile()
 }
 
 func Logout() error {
