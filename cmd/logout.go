@@ -12,7 +12,7 @@ import (
 var logoutCmd = &cobra.Command{
 	Use:   "logout",
 	Short: "登出当前用户",
-	Long: `使用此指令可以退出当前账户`,
+	Long:  `使用此指令可以退出当前账户`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("logout called")
 	},

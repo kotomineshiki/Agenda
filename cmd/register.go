@@ -5,6 +5,7 @@ package cmd
 import (
 	"Agenda/service"
 	"fmt"
+	"regexp"
 
 	"github.com/spf13/cobra"
 )
@@ -12,13 +13,11 @@ import (
 // registerCmd represents the register command
 var registerCmd = &cobra.Command{
 	Use:   "register",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+	Short: "register a new User",
+	Long: `register:register a new User,just like
+	register a new user,with name:A, password:12345678
+	agenda register -n=A -p=12345678 `,
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		username, _ := cmd.Flags().GetString("username")
 		password, _ := cmd.Flags().GetString("password")
@@ -46,21 +45,66 @@ func init() {
 	// is called directly, e.g.:
 	// registerCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
+
 func register(username string, password string, email string, phonenumber string) {
 	if username == "" || password == "" || email == "" || phonenumber == "" {
 		fmt.Println("Please tell us your username[-u], password[-p], email[-e], telephone[-t]")
 		return
 	}
-	pass, err := service.UserRegister(username, password, email, phonenumber)
-	if pass == false {
-		fmt.Println("Username existed!")
-		return
-	} else {
-		if err != nil {
-			fmt.Println("Some unexpected error happened when try to record your info,Please read error.log for detail")
+
+	if isValidName(username) && isValidPassword(password) && isValidEmail(email) && isValidPhone(phonenumber) {
+		pass, err := service.UserRegister(username, password, email, phonenumber)
+		if pass == false {
+			fmt.Println("Username existed!")
 			return
 		} else {
-			fmt.Println("Successfully register!")
+			if err != nil {
+				fmt.Println("Some unexpected error happened when try to record your info,Please read error.log for detail")
+				return
+			} else {
+				fmt.Println("Successfully register!")
+			}
 		}
 	}
+}
+
+func isValidName(n string) bool {
+	b := []byte(n)
+	val, _ := regexp.Match(".+", b)
+	if !val {
+		fmt.Println("flag -n ,name is invaild")
+	}
+	return val
+}
+
+func isValidPassword(p string) bool {
+	b := []byte(p)
+	val, _ := regexp.Match(".+", b)
+	if len(p) < 8 {
+		fmt.Println("The password must be longer than 8 digits")
+		val = false
+	}
+	if !val {
+		fmt.Println("flag -p ,password is invaild")
+	}
+	return val
+}
+func isValidEmail(e string) bool {
+	b := []byte(e)
+	val, _ := regexp.Match("\\w*@\\w*\\.w*", b)
+
+	if !val {
+		fmt.Println("email is invaild")
+	}
+	return val
+}
+func isValidPhone(p string) bool {
+	b := []byte(p)
+
+	val, _ := regexp.Match("[0-9]+", b)
+
+	if !val {
+		fmt.Println("phone is invaild")
+	}
+	return val
 }

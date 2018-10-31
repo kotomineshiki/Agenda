@@ -14,3 +14,11 @@ ERROR: 2018/10/31 15:59:38 log.go:85: Start up Error log
 ERROR: 2018/10/31 15:59:51 log.go:85: Start up Error log
 ERROR: 2018/10/31 15:59:51 agendaservice.go:45: Login: User not Exist
 ERROR: 2018/10/31 16:02:07 log.go:85: Start up Error log
+ERROR: 2018/10/31 17:18:59 log.go:85: Start up Error log
+ERROR: 2018/10/31 17:19:23 log.go:85: Start up Error log
+ERROR: 2018/10/31 17:19:43 log.go:85: Start up Error log
+ERROR: 2018/10/31 17:20:13 log.go:85: Start up Error log
+ERROR: 2018/10/31 17:52:00 log.go:85: Start up Error log
+ERROR: 2018/10/31 17:52:39 log.go:85: Start up Error log
+ERROR: 2018/10/31 17:52:39 agendaservice.go:62: User Register: Already exist username
+ERROR: 2018/10/31 17:52:59 log.go:85: Start up Error log
