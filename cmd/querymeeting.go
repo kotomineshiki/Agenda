@@ -25,19 +25,15 @@ import (
 // querymeetingCmd represents the querymeeting command
 var querymeetingCmd = &cobra.Command{
 	Use:   "querymeeting",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "query meetings from starttime to endtime ",
+	Long: `query meetings from starttime to endtime, just like:
+	Agenda querymeeting -s [yyyy-mm-dd/hh:mm] -e [yyyy-mm-dd/hh:mm]`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("querymeeting called")
 		starttime, _ := cmd.Flags().GetString("starttime")
 		endtime, _ := cmd.Flags().GetString("endtime")
 		if starttime == "" || endtime == "" {
-			fmt.Println("querymeeting -s [starttime] -e [endtime]")
+			fmt.Println("querymeeting -s [yyyy-mm-dd/hh:mm] -e [yyyy-mm-dd/hh:mm]")
 			return
 		}
 		user, flag := service.GetCurUser()
@@ -45,10 +41,10 @@ to quickly create a Cobra application.`,
 			fmt.Println("Please Log in firstly")
 			return
 		}
-		temp_mets, flag := service.QueryMeeting(user.M_name, starttime, endtime)
-		fmt.Println(len(temp_mets))
+		meetings, flag := service.QueryMeeting(user.M_name, starttime, endtime)
+		fmt.Println(len(meetings))
 		if flag == true {
-			for _, m := range temp_mets {
+			for _, m := range meetings {
 				fmt.Println("----------------")
 				fmt.Println("Title: ", m.M_title)
 				ts, _ := entity.DateToString(m.M_startDate)

@@ -24,19 +24,15 @@ import (
 // removeparticipatorCmd represents the removeparticipator command
 var removeparticipatorCmd = &cobra.Command{
 	Use:   "removeparticipator",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "remove participator(s) in your meeting specified by title",
+	Long: `remove participator(s) in your meeting specified by title,just like:
+	Agenda removeparticipator -t [title] -p [\"name1, name2\"]`,
 	Run: func(cmd *cobra.Command, args []string) {
 		title, _ := cmd.Flags().GetString("title")
 		participator, _ := cmd.Flags().GetStringSlice("participator")
 		fmt.Println("removeparticipator called")
 		if title == "" || len(participator) == 0 {
-			fmt.Println("Please input title and participator(s)(input like \"name1, name2\")")
+			fmt.Println("Please input command like: removeparticipator -t [title] -p [\"name1, name2\"]")
 			return
 		}
 		if user, flag := service.GetCurUser(); flag != true {

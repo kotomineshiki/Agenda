@@ -15,16 +15,17 @@
 package cmd
 
 import (
-	"Agenda/service"
 	"fmt"
 
 	"github.com/spf13/cobra"
+
+	"Agenda/service"
 )
 
 // deleteuserCmd represents the deleteuser command
 var deleteuserCmd = &cobra.Command{
 	Use:   "deleteuser",
-	Short: "A brief description of your command",
+	Short: "delete a user",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("deleteuser called")
 		user, flag := service.GetCurUser()

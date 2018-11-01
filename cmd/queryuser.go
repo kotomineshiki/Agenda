@@ -24,7 +24,9 @@ import (
 // queryuserCmd represents the queryuser command
 var queryuserCmd = &cobra.Command{
 	Use:   "queryuser",
-	Short: "A brief description of your command",
+	Short: "query all users' message",
+	Long: `query all users' message, just like:
+	Agenda queryuser`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("queryuser called")
 		if _, flag := service.GetCurUser(); flag != true {
@@ -33,11 +35,11 @@ var queryuserCmd = &cobra.Command{
 		}
 		ru := service.ListAllUser()
 		for _, u := range ru {
-			fmt.Println("----------------")
+			fmt.Println("-----------------")
 			fmt.Println("Username: ", u.M_name)
-			fmt.Println("Phone: ", u.M_phone)
 			fmt.Println("Email: ", u.M_email)
-			fmt.Println("----------------")
+			fmt.Println("Phone: ", u.M_phone)
+			fmt.Println("-----------------")
 		}
 	},
 }

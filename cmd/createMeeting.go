@@ -11,15 +11,17 @@ import (
 
 // createMeetingCmd represents the createMeeting command
 var createMeetingCmd = &cobra.Command{
-	Use:   "createMeeting -t [Title] -p [Participator] -s [StartTime] -e [EndTime]",
-	Short: "A brief description of your command",
+	Use:   "createMeeting",
+	Short: "create a new meeting",
+	Long: `create a meeting just like:
+	agenda createMeeting -t [Title] -p [\"name1, name2\"] -s [yyyy-mm-dd/hh:mm] -e [yyyy-mm-dd/hh:mm]`,
 	Run: func(cmd *cobra.Command, args []string) {
 		title, _ := cmd.Flags().GetString("Title")
 		participators, _ := cmd.Flags().GetStringSlice("Participator")
 		startTime, _ := cmd.Flags().GetString("StartTime")
 		endTime, _ := cmd.Flags().GetString("EndTime")
 		if title == "" || len(participators) == 0 || startTime == "" || endTime == "" {
-			fmt.Println("createMeeting -t [Title] -p [Participator] -s [StartTime] -e [EndTime]")
+			fmt.Println("createMeeting -t [Title] -p [\"name1, name2\"] -s [yyyy-mm-dd/hh:mm] -e [yyyy-mm-dd/hh:mm]")
 			return
 		}
 		fmt.Println("createMeeting called" + title + startTime + endTime)
