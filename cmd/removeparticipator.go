@@ -15,9 +15,6 @@
 package cmd
 
 import (
-	"Agenda/service"
-	"fmt"
-
 	"github.com/spf13/cobra"
 )
 
@@ -27,25 +24,6 @@ var removeparticipatorCmd = &cobra.Command{
 	Short: "remove participator(s) in your meeting specified by title",
 	Long: `remove participator(s) in your meeting specified by title,just like:
 	Agenda removeparticipator -t [title] -p [\"name1, name2\"]`,
-	Run: func(cmd *cobra.Command, args []string) {
-		title, _ := cmd.Flags().GetString("title")
-		participator, _ := cmd.Flags().GetStringSlice("participator")
-		fmt.Println("removeparticipator called")
-		if title == "" || len(participator) == 0 {
-			fmt.Println("Please input command like: removeparticipator -t [title] -p [\"name1, name2\"]")
-			return
-		}
-		if user, flag := service.GetCurUser(); flag != true {
-			fmt.Println("Please login firstly")
-		} else {
-			// participators := strings.Split(tmp_p, ",")
-			if service.RemoveMeetingParticipator(user.M_name, title, participator) {
-				fmt.Println("[remove participator] succeed!")
-			} else {
-				fmt.Println("[remove participator] error!. Check error.log for detail")
-			}
-		}
-	},
 }
 
 func init() {
