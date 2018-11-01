@@ -59,7 +59,7 @@ var querymeetingCmd = &cobra.Command{
 					fmt.Println("End Time", te)
 					fmt.Printf("Participator(s): ")
 					for _, p := range m.M_participators {
-						fmt.Printf(p, " ")
+						fmt.Printf(p + " ")
 					}
 					fmt.Printf("\n")
 					fmt.Println("----------------")
