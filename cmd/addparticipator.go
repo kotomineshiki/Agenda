@@ -32,7 +32,7 @@ var addparticipatorCmd = &cobra.Command{
 		meetingtitle, _ := cmd.Flags().GetString("title")
 		username, _ := cmd.Flags().GetStringSlice("participator")
 		if len(username) == 0 || meetingtitle == "" {
-			fmt.Println("Please input title and participator(s)(input like \"name1, name2\")")
+			fmt.Println("Please input commend like, aaddparticipator -t meetingtitle -p \"name1, name2\")")
 			return
 		}
 		//fmt.Println("addparticipator called")
@@ -63,3 +63,32 @@ func init() {
 	// is called directly, e.g.:
 	// addparticipatorCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
+
+/*
+func isParticipatorinList(name string, participators []string) bool {
+	for _, j := range participators {
+		if name == j {
+			return true
+		}
+	}
+	return false
+}
+func isParticipatorExist(name string, participators []entity.User) bool {
+	for _, j := range participators {
+		if name == j.Name {
+			return true
+		}
+	}
+	return false
+}
+func isParticipatorExistinMeeting(name string, meeting entity.Meeting) bool {
+	if name == meeting.Sponsor {
+		return true
+	}
+	for _, j := range meeting.Participators {
+		if name == j {
+			return true
+		}
+	}
+	return false
+}*/
