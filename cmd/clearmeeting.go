@@ -19,19 +19,29 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
+
+	"Agenda/service"
 )
 
 // clearmeetingCmd represents the clearmeeting command
 var clearmeetingCmd = &cobra.Command{
 	Use:   "clearmeeting",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "clear all meetings whose sponsor is the user",
+	Long: `claer all meeting which belongs to the user, just like:
+	agenda clearmeeting`,
 	Run: func(cmd *cobra.Command, args []string) {
+<<<<<<< HEAD
+		//fmt.Println("clearmeeting called")
+		if user, flag := service.GetCurUser(); flag != true {
+			fmt.Println("Please Log in firstly!")
+		} else {
+			cm, flag := service.ClearMeeting(user.GetName())
+			if flag == true {
+				fmt.Println("Successfully clear ", cm, " meeting(s)")
+			} else {
+				fmt.Println("ClearMeeting failed. Check error.log")
+			}
+=======
 		fmt.Println("clearmeeting called")
 		user, flag := service.GetCurUser()
 		if flag != true {
@@ -42,6 +52,7 @@ to quickly create a Cobra application.`,
 			fmt.Println("Successfully clear ", num, " meeting(s)")
 		} else {
 			fmt.Println("ClearMeeting failed. Check error.log")
+>>>>>>> 803333889b03ec9281d3ef31e6b69bb55b65ece5
 		}
 	},
 }

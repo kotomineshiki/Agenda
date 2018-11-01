@@ -15,8 +15,8 @@ var registerCmd = &cobra.Command{
 	Use:   "register",
 	Short: "register a new User",
 	Long: `register:register a new User,just like
-	register a new user,with name:A, password:12345678
-	agenda register -n=A -p=12345678 `,
+	register a new user,with name:A, password:12345678, email: 123@123, phone:12345678
+	agenda register -u A -p 12345678 -e 123@123 -t 12345678`,
 
 	Run: func(cmd *cobra.Command, args []string) {
 		username, _ := cmd.Flags().GetString("username")
