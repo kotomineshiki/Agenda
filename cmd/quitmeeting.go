@@ -29,7 +29,7 @@ var quitmeetingCmd = &cobra.Command{
 	Agenda quitmeeting -t [title]`,
 	Run: func(cmd *cobra.Command, args []string) {
 		title, _ := cmd.Flags().GetString("title")
-		fmt.Println("quitmeeting called")
+		//fmt.Println("quitmeeting called")
 		if title == "" {
 			fmt.Println("Please input meeting's title you want to quit")
 			return
@@ -44,7 +44,8 @@ var quitmeetingCmd = &cobra.Command{
 			if service.QuitMeeting(user.M_name, title) {
 				fmt.Println("[quit meeting] succeed!")
 			} else {
-				fmt.Println("[quit meeting] error!")
+				fmt.Println("quit meeting failed!")
+				fmt.Println("Please read error.log for detail")
 			}
 		}
 	},

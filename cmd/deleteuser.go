@@ -27,7 +27,7 @@ var deleteuserCmd = &cobra.Command{
 	Use:   "deleteuser",
 	Short: "delete a user",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("deleteuser called")
+		//fmt.Println("deleteuser called")
 		user, flag := service.GetCurUser()
 		if flag != true {
 			fmt.Println("[Error]")
@@ -38,7 +38,7 @@ var deleteuserCmd = &cobra.Command{
 			if service.DeleteUser(user.M_name) {
 				fmt.Println("[delete agenda account] succeed!")
 			} else {
-				fmt.Println("[delete agenda account] error!")
+				fmt.Println("delete Wrong! more error message please read error.log for detail")
 			}
 		}
 	},

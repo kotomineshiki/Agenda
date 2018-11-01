@@ -29,7 +29,7 @@ var querymeetingCmd = &cobra.Command{
 	Long: `query meetings from starttime to endtime, just like:
 	Agenda querymeeting -s [yyyy-mm-dd/hh:mm] -e [yyyy-mm-dd/hh:mm]`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("querymeeting called")
+		//fmt.Println("querymeeting called")
 		starttime, _ := cmd.Flags().GetString("starttime")
 		endtime, _ := cmd.Flags().GetString("endtime")
 		if starttime == "" || endtime == "" {
@@ -45,23 +45,28 @@ var querymeetingCmd = &cobra.Command{
 			return
 		}
 		meetings, flag := service.QueryMeeting(user.M_name, starttime, endtime)
-		fmt.Println(len(meetings))
+		//fmt.Println(len(meetings))
 		if flag == true {
-			for _, m := range meetings {
-				fmt.Println("----------------")
-				fmt.Println("Title: ", m.M_title)
-				ts, _ := entity.DateToString(m.M_startDate)
-				fmt.Println("Start Time", ts)
-				te, _ := entity.DateToString(m.M_endDate)
-				fmt.Println("End Time", te)
-				fmt.Printf("Participator(s): ")
-				for _, p := range m.M_participators {
-					fmt.Printf(p, " ")
+			if len(meetings) == 0 {
+				fmt.Println("congratulations! You don't have any meetings")
+			} else {
+				for _, m := range meetings {
+					fmt.Println("----------------")
+					fmt.Println("Title: ", m.M_title)
+					ts, _ := entity.DateToString(m.M_startDate)
+					fmt.Println("Start Time", ts)
+					te, _ := entity.DateToString(m.M_endDate)
+					fmt.Println("End Time", te)
+					fmt.Printf("Participator(s): ")
+					for _, p := range m.M_participators {
+						fmt.Printf(p, " ")
+					}
+					fmt.Printf("\n")
+					fmt.Println("----------------")
 				}
-				fmt.Printf("\n")
-				fmt.Println("----------------")
 			}
 		} else {
+			fmt.Println("query meetings failed!")
 			fmt.Println("Please check your input the date as yyyy-mm-dd/hh:mm and make sure that starttiem <= endtime")
 		}
 	},

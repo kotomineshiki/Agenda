@@ -15,7 +15,7 @@ var logoutCmd = &cobra.Command{
 	Short: "登出当前用户",
 	Long:  `使用此指令可以退出当前账户`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("logout called")
+		//fmt.Println("logout called")
 		_, flag := service.GetCurUser()
 		if flag != true {
 			fmt.Println("[Error]")
@@ -27,7 +27,8 @@ var logoutCmd = &cobra.Command{
 		if service.UserLogout() {
 			fmt.Println("[log out] succeed!")
 		} else {
-			fmt.Println("[log out] wrong!")
+			fmt.Println("logout failed!")
+			fmt.Println("more error message please read error.log for detail")
 		}
 	},
 }

@@ -16,8 +16,13 @@ var deleteMeetingCmd = &cobra.Command{
 	Agenda deleteMeeting -t [title]`,
 	Run: func(cmd *cobra.Command, args []string) {
 		title, _ := cmd.Flags().GetString("Title")
-		fmt.Println("deleteMeeting called" + title)
+		//fmt.Println("deleteMeeting called" + title)
 		//查看该Meeting是否存在
+
+		if title == "" {
+			fmt.Println("Please input command like: deleteMeeting -t [title]")
+			return
+		}
 		user, flag := service.GetCurUser()
 		if flag != true {
 			fmt.Println("[Error]")
@@ -28,6 +33,7 @@ var deleteMeetingCmd = &cobra.Command{
 		}
 		if service.DeleteMeeting(user.M_name, title) {
 			fmt.Println("[delete meeting] succeed!")
+			fmt.Println("Current user", user.GetName())
 		} else {
 			fmt.Println("[error] delete meeting fail!")
 		}

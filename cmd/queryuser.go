@@ -28,7 +28,7 @@ var queryuserCmd = &cobra.Command{
 	Long: `query all users' message, just like:
 	Agenda queryuser`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("queryuser called")
+		//fmt.Println("queryuser called")
 		if _, flag := service.GetCurUser(); flag != true {
 			fmt.Println("[Error]")
 			fmt.Println("Cmd queryuser failed")

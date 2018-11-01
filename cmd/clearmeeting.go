@@ -38,6 +38,7 @@ var clearmeetingCmd = &cobra.Command{
 			cm, flag := service.ClearMeeting(user.GetName())
 			if flag == true {
 				fmt.Println("Successfully clear ", cm, " meeting(s)")
+				fmt.Println("Current user: ", user.M_name)
 			} else {
 				fmt.Println("ClearMeeting failed. Check error.log")
 			}

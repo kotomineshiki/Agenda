@@ -26,13 +26,13 @@ var addparticipatorCmd = &cobra.Command{
 	Use:   "addparticipator",
 	Short: "add participators",
 	Long: `add participators to a meeting by meeting's name ,just like:
-	agenda addparticipator -t meetingtitle -p "a, b"`,
+	agenda addparticipator -t meetingtitle -p [\"a, b\"]`,
 	Args: cobra.MinimumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 		meetingtitle, _ := cmd.Flags().GetString("title")
 		username, _ := cmd.Flags().GetStringSlice("participator")
 		if len(username) == 0 || meetingtitle == "" {
-			fmt.Println("Please input commend like, aaddparticipator -t meetingtitle -p \"name1, name2\")")
+			fmt.Println("Please input commend like, aaddparticipator -t [meetingtitle] -p [\"name1, name2\"])")
 			return
 		}
 		//fmt.Println("addparticipator called")
@@ -48,6 +48,7 @@ var addparticipatorCmd = &cobra.Command{
 				fmt.Println("Unexpected error. Check error.log for detail")
 			} else {
 				fmt.Println("Successfully add")
+				fmt.Println("Current user: ", user.GetName())
 			}
 		}
 	},
