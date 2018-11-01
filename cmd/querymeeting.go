@@ -47,19 +47,6 @@ var querymeetingCmd = &cobra.Command{
 		meetings, flag := service.QueryMeeting(user.M_name, starttime, endtime)
 		//fmt.Println(len(meetings))
 		if flag == true {
-<<<<<<< HEAD
-			for _, m := range temp_mets {
-				fmt.Println("----------------")
-				fmt.Println("Title: ", m.M_title)
-				fmt.Println("Sponsor: ", m.M_sponsor)
-				ts, _ := entity.DateToString(m.M_startDate)
-				fmt.Println("Start Time", ts)
-				te, _ := entity.DateToString(m.M_endDate)
-				fmt.Println("End Time", te)
-				fmt.Printf("Participator(s): ")
-				for _, p := range m.M_participators {
-					fmt.Printf(p + " ")
-=======
 			if len(meetings) == 0 {
 				fmt.Println("congratulations! You don't have any meetings")
 			} else {
@@ -76,7 +63,6 @@ var querymeetingCmd = &cobra.Command{
 					}
 					fmt.Printf("\n")
 					fmt.Println("----------------")
->>>>>>> d4881b3b0e10287eef4ff72c502a2c0e6cf269fb
 				}
 			}
 		} else {

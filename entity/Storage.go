@@ -227,8 +227,8 @@ func DeleteUser(filter UserFilter) int {
 	count := 0
 	for i := 0; i < len(userData); {
 		if filter(&userData[i]) {
-			userData[i] = userData[length]
-			userData = userData[:length]
+			userData[i] = userData[len(userData)]
+			userData = userData[:len(userData)]
 			count++
 		} else {
 			i++
@@ -269,8 +269,8 @@ func DeleteMeeting(filter MeetingFilter) int {
 	count := 0
 	for i := 0; i < len(meetingData); {
 		if filter(&meetingData[i]) {
-			meetingData[i] = meetingData[length]
-			meetingData = meetingData[:length]
+			meetingData[i] = meetingData[len(meetingData)]
+			meetingData = meetingData[:len(meetingData)]
 			count++
 		} else {
 			i++

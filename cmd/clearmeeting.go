@@ -28,18 +28,6 @@ var clearmeetingCmd = &cobra.Command{
 	Long: `claer all meeting which belongs to the user, just like:
 	agenda clearmeeting`,
 	Run: func(cmd *cobra.Command, args []string) {
-<<<<<<< HEAD
-		fmt.Println("clearmeeting called")
-		user, flag := service.GetCurUser()
-		if flag != true {
-			fmt.Println("Please Log in firstly!")
-		}
-		num, flag := service.ClearMeeting(user.M_name)
-		if flag {
-			fmt.Println("Successfully clear ", num, " meeting(s)")
-		} else {
-			fmt.Println("ClearMeeting failed. Check error.log")
-=======
 		//fmt.Println("clearmeeting called")
 		if user, flag := service.GetCurUser(); flag != true {
 			fmt.Println("[Error]")
@@ -54,7 +42,6 @@ var clearmeetingCmd = &cobra.Command{
 			} else {
 				fmt.Println("ClearMeeting failed. Check error.log")
 			}
->>>>>>> d4881b3b0e10287eef4ff72c502a2c0e6cf269fb
 		}
 	},
 }
