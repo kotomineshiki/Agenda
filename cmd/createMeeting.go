@@ -28,7 +28,10 @@ var createMeetingCmd = &cobra.Command{
 		//判断是否合法
 		user, flag := service.GetCurUser()
 		if flag != true {
-			fmt.Println("Error: please login firstly")
+			fmt.Println("[Error]")
+			fmt.Println("Cmd createMeeting failed")
+			fmt.Println("Not log in yet")
+			fmt.Println("Please Log in firstly!")
 			return
 		}
 		if service.CreateMeeting(user.M_name, title, startTime, endTime, participators) {

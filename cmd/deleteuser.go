@@ -30,7 +30,10 @@ var deleteuserCmd = &cobra.Command{
 		fmt.Println("deleteuser called")
 		user, flag := service.GetCurUser()
 		if flag != true {
-			fmt.Println("Please Log in firstly")
+			fmt.Println("[Error]")
+			fmt.Println("Cmd deleteuser failed")
+			fmt.Println("Not log in yet")
+			fmt.Println("Please Log in firstly!")
 		} else {
 			if service.DeleteUser(user.M_name) {
 				fmt.Println("[delete agenda account] succeed!")

@@ -36,7 +36,10 @@ var removeparticipatorCmd = &cobra.Command{
 			return
 		}
 		if user, flag := service.GetCurUser(); flag != true {
-			fmt.Println("Please login firstly")
+			fmt.Println("[Error]")
+			fmt.Println("Cmd removeparticipator failed")
+			fmt.Println("Not log in yet")
+			fmt.Println("Please Log in firstly!")
 		} else {
 			// participators := strings.Split(tmp_p, ",")
 			if service.RemoveMeetingParticipator(user.M_name, title, participator) {

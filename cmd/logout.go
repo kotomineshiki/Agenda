@@ -18,7 +18,10 @@ var logoutCmd = &cobra.Command{
 		fmt.Println("logout called")
 		_, flag := service.GetCurUser()
 		if flag != true {
-			fmt.Println("Please Log in firstly")
+			fmt.Println("[Error]")
+			fmt.Println("Cmd logout failed")
+			fmt.Println("Not log in yet")
+			fmt.Println("Please Log in firstly!")
 			return
 		}
 		if service.UserLogout() {

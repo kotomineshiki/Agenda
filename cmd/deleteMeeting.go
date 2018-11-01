@@ -20,7 +20,10 @@ var deleteMeetingCmd = &cobra.Command{
 		//查看该Meeting是否存在
 		user, flag := service.GetCurUser()
 		if flag != true {
-			fmt.Println("Please Log in firstly")
+			fmt.Println("[Error]")
+			fmt.Println("Cmd deleteMeeting failed")
+			fmt.Println("Not log in yet")
+			fmt.Println("Please Log in firstly!")
 			return
 		}
 		if service.DeleteMeeting(user.M_name, title) {

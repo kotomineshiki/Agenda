@@ -30,6 +30,9 @@ var clearmeetingCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		//fmt.Println("clearmeeting called")
 		if user, flag := service.GetCurUser(); flag != true {
+			fmt.Println("[Error]")
+			fmt.Println("Cmd clearmeeting failed")
+			fmt.Println("Not log in yet")
 			fmt.Println("Please Log in firstly!")
 		} else {
 			cm, flag := service.ClearMeeting(user.GetName())

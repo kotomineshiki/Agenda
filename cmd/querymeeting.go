@@ -38,7 +38,10 @@ var querymeetingCmd = &cobra.Command{
 		}
 		user, flag := service.GetCurUser()
 		if flag != true {
-			fmt.Println("Please Log in firstly")
+			fmt.Println("[Error]")
+			fmt.Println("Cmd querymeeting failed")
+			fmt.Println("Not log in yet")
+			fmt.Println("Please Log in firstly!")
 			return
 		}
 		meetings, flag := service.QueryMeeting(user.M_name, starttime, endtime)

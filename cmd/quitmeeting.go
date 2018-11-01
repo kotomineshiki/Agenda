@@ -36,7 +36,10 @@ var quitmeetingCmd = &cobra.Command{
 		}
 		user, flag := service.GetCurUser()
 		if flag != true {
-			fmt.Println("Please login firstly")
+			fmt.Println("[Error]")
+			fmt.Println("Cmd quitmeeting failed")
+			fmt.Println("Not log in yet")
+			fmt.Println("Please Log in firstly!")
 		} else {
 			if service.QuitMeeting(user.M_name, title) {
 				fmt.Println("[quit meeting] succeed!")

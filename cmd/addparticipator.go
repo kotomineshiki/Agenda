@@ -37,7 +37,10 @@ var addparticipatorCmd = &cobra.Command{
 		}
 		//fmt.Println("addparticipator called")
 		if user, flag := service.GetCurUser(); flag != true {
-			fmt.Println("Please login firstly")
+			fmt.Println("[Error]")
+			fmt.Println("Cmd addparticipator failed")
+			fmt.Println("Not log in yet")
+			fmt.Println("Please Log in firstly!")
 		} else {
 			// participators := strings.Split(tmp_p,",")
 			flag := service.AddMeetingParticipator(user.GetName(), meetingtitle, username)

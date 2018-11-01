@@ -30,7 +30,10 @@ var queryuserCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("queryuser called")
 		if _, flag := service.GetCurUser(); flag != true {
-			fmt.Println("Please Log in firstly")
+			fmt.Println("[Error]")
+			fmt.Println("Cmd queryuser failed")
+			fmt.Println("Not log in yet")
+			fmt.Println("Please Log in firstly!")
 			return
 		}
 		ru := service.ListAllUser()
