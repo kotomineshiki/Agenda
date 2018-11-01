@@ -253,6 +253,9 @@ func QuitMeeting(username string, title string) bool {
 	entity.DeleteMeeting(func(m *entity.Meeting) bool {
 		return len(m.GetParticipator()) == 0
 	})
+	if err := entity.Sync(); err != nil {
+		return false
+	}
 	return true
 }
 
