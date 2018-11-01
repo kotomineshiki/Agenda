@@ -7,15 +7,15 @@ import (
 )
 
 type Date struct {
-	m_year, m_month, m_day, m_hour, m_minute int
+	M_year, M_month, M_day, M_hour, M_minute int
 }
 
 func (m_date Date) init(t_year, t_month, t_day, t_hour, t_minute int) {
-	m_date.m_year = t_year
-	m_date.m_month = t_month
-	m_date.m_day = t_day
-	m_date.m_hour = t_hour
-	m_date.m_minute = t_minute
+	m_date.M_year = t_year
+	m_date.M_month = t_month
+	m_date.M_day = t_day
+	m_date.M_hour = t_hour
+	m_date.M_minute = t_minute
 }
 
 func (m_date Date) CopyDate(t_date Date) Date {
@@ -46,43 +46,43 @@ func StringToDate(t_dateString string) (Date, error) {
 		count++
 	}
 	var err error = nil
-	result.m_year, err = strconv.Atoi(t_dateString[0:4])
-	result.m_month, err = strconv.Atoi(t_dateString[5:7])
-	result.m_day, err = strconv.Atoi(t_dateString[8:10])
-	result.m_hour, err = strconv.Atoi(t_dateString[11:13])
-	result.m_minute, err = strconv.Atoi(t_dateString[14:])
+	result.M_year, err = strconv.Atoi(t_dateString[0:4])
+	result.M_month, err = strconv.Atoi(t_dateString[5:7])
+	result.M_day, err = strconv.Atoi(t_dateString[8:10])
+	result.M_hour, err = strconv.Atoi(t_dateString[11:13])
+	result.M_minute, err = strconv.Atoi(t_dateString[14:])
 	return result, err
 }
 
 func (m_date Date) GetYear() int {
-	return m_date.m_year
+	return m_date.M_year
 }
 func (m_date Date) SetYear(t_year int) {
-	m_date.m_year = t_year
+	m_date.M_year = t_year
 }
 func (m_date Date) GetMonth() int {
-	return m_date.m_month
+	return m_date.M_month
 }
 func (m_date Date) SetMonth(t_month int) {
-	m_date.m_month = t_month
+	m_date.M_month = t_month
 }
 func (m_date Date) GetDay() int {
-	return m_date.m_day
+	return m_date.M_day
 }
 func (m_date Date) SetDay(t_day int) {
-	m_date.m_day = t_day
+	m_date.M_day = t_day
 }
 func (m_date Date) GetHour() int {
-	return m_date.m_hour
+	return m_date.M_hour
 }
 func (m_date Date) SetHour(t_hour int) {
-	m_date.m_hour = t_hour
+	m_date.M_hour = t_hour
 }
 func (m_date Date) GetMinute() int {
-	return m_date.m_minute
+	return m_date.M_minute
 }
 func (m_date Date) SetMinute(t_minute int) {
-	m_date.m_minute = t_minute
+	m_date.M_minute = t_minute
 }
 
 func IsValid(t_date Date) bool {
@@ -131,19 +131,19 @@ func (m_date Date) IsSameDate(t_date Date) bool {
 }
 
 func (m_date Date) MoreThan(t_date Date) bool {
-	if m_date.m_year > t_date.GetYear() {
+	if m_date.M_year > t_date.GetYear() {
 		return true
-	} else if m_date.m_year == t_date.GetYear() {
-		if m_date.m_month > t_date.GetMonth() {
+	} else if m_date.M_year == t_date.GetYear() {
+		if m_date.M_month > t_date.GetMonth() {
 			return true
-		} else if m_date.m_month == t_date.GetMonth() {
-			if m_date.m_day > t_date.GetDay() {
+		} else if m_date.M_month == t_date.GetMonth() {
+			if m_date.M_day > t_date.GetDay() {
 				return true
-			} else if m_date.m_day == t_date.GetDay() {
-				if m_date.m_hour > t_date.GetHour() {
+			} else if m_date.M_day == t_date.GetDay() {
+				if m_date.M_hour > t_date.GetHour() {
 					return true
-				} else if m_date.m_hour == t_date.GetHour() {
-					if m_date.m_minute > t_date.GetMinute() {
+				} else if m_date.M_hour == t_date.GetHour() {
+					if m_date.M_minute > t_date.GetMinute() {
 						return true
 					}
 				}

@@ -6,7 +6,6 @@ import (
 	"bufio"
 	"encoding/json"
 	"errors"
-	"fmt"
 	"io"
 	"log"
 	"os"
@@ -60,10 +59,10 @@ func writeToFile() error {
 		e = append(e, err)
 	}
 	if dirty {
-		if err := writeJSON(userinfoPath, userData); err != nil {
+		if err := writeUser(); err != nil {
 			e = append(e, err)
 		}
-		if err := writeJSON(metinfoPath, meetingData); err != nil {
+		if err := writeMeeting(); err != nil {
 			e = append(e, err)
 		}
 	}
@@ -99,19 +98,6 @@ func readFromFile() error {
 	}
 	return er
 }
-func writeJSON(fpath string, data interface{}) error {
-	file, err := os.Create(fpath)
-	if err != nil {
-		return err
-	}
-	defer file.Close()
-	enc := json.NewEncoder(file)
-	if err := enc.Encode(&data); err != nil {
-		errLog.Println("writeJSON:", err)
-		return err
-	}
-	return nil
-}
 func writeString(path string, data *string) error {
 	file, err := os.Create(path)
 	if err != nil {
@@ -146,6 +132,32 @@ func readString(path string) (*string, error) {
 		return nil, err
 	}
 	return &str, nil
+}
+func writeUser() error {
+	file, err := os.Create(userinfoPath)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+	enc := json.NewEncoder(file)
+	if err := enc.Encode(&userData); err != nil {
+		errLog.Println("writeJSON:", err)
+		return err
+	}
+	return nil
+}
+func writeMeeting() error {
+	file, err := os.Create(metinfoPath)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+	enc := json.NewEncoder(file)
+	if err := enc.Encode(&meetingData); err != nil {
+		errLog.Println("writeJSON:", err)
+		return err
+	}
+	return nil
 }
 
 func readUser() error {
@@ -227,8 +239,7 @@ func DeleteUser(filter UserFilter) int {
 	return count
 }
 func CreateMeeting(v *Meeting) {
-	meetingData = append(meetingData, deepcopy.Copy(*v).(Meeting))
-	fmt.Println(DateToString(meetingData[1].M_endDate))
+	meetingData = append(meetingData, (*v))
 	dirty = true
 }
 func QueryMeeting(filter MeetingFilter) []Meeting {
