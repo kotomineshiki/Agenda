@@ -1,4 +1,28 @@
 <<<<<<< HEAD
+INFO: 2018/11/01 01:50:16 log.go:81: Start up Info log
+INFO: 2018/11/01 01:50:55 log.go:81: Start up Info log
+INFO: 2018/11/01 10:43:44 log.go:81: Start up Info log
+INFO: 2018/11/01 10:44:02 log.go:81: Start up Info log
+INFO: 2018/11/01 10:44:20 log.go:81: Start up Info log
+INFO: 2018/11/01 10:44:36 log.go:81: Start up Info log
+INFO: 2018/11/01 10:44:47 log.go:81: Start up Info log
+INFO: 2018/11/01 11:00:26 log.go:81: Start up Info log
+INFO: 2018/11/01 11:00:53 log.go:81: Start up Info log
+INFO: 2018/11/01 11:01:42 log.go:81: Start up Info log
+INFO: 2018/11/01 11:04:41 log.go:81: Start up Info log
+INFO: 2018/11/01 11:05:17 log.go:81: Start up Info log
+INFO: 2018/11/01 11:05:40 log.go:81: Start up Info log
+INFO: 2018/11/01 11:06:32 log.go:81: Start up Info log
+INFO: 2018/11/01 11:06:50 log.go:81: Start up Info log
+INFO: 2018/11/01 11:07:09 log.go:81: Start up Info log
+INFO: 2018/11/01 11:07:40 log.go:81: Start up Info log
+INFO: 2018/11/01 11:09:22 log.go:81: Start up Info log
+INFO: 2018/11/01 11:10:05 log.go:81: Start up Info log
+INFO: 2018/11/01 11:11:17 log.go:81: Start up Info log
+INFO: 2018/11/01 11:11:33 log.go:81: Start up Info log
+INFO: 2018/11/01 11:12:11 log.go:81: Start up Info log
+=======
+<<<<<<< HEAD
 INFO: 2018/10/31 10:31:08 log.go:81: Start up Info log
 INFO: 2018/10/31 10:31:38 log.go:81: Start up Info log
 INFO: 2018/10/31 10:31:58 log.go:81: Start up Info log
@@ -41,8 +65,12 @@ INFO: 2018/11/01 01:33:53 log.go:81: Start up Info log
 INFO: 2018/11/01 01:34:29 log.go:81: Start up Info log
 =======
 >>>>>>> 803333889b03ec9281d3ef31e6b69bb55b65ece5
+<<<<<<< HEAD
 INFO: 2018/11/01 10:25:56 log.go:81: Start up Info log
 INFO: 2018/11/01 10:32:05 log.go:81: Start up Info log
 INFO: 2018/11/01 10:38:03 log.go:81: Start up Info log
 INFO: 2018/11/01 10:43:17 log.go:81: Start up Info log
 INFO: 2018/11/01 10:47:54 log.go:81: Start up Info log
+=======
+>>>>>>> ab0c821f4d5571ba66bba3241af279edb4938000
+>>>>>>> 836f5fac5d6c31de568e51ae70c65e6123207818
