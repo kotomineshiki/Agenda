@@ -54,23 +54,24 @@ func UserLogin(username string, password string) bool {
 }
 func UserRegister(username string, password string, email string, phone string) (bool, error) {
 
-	user := entity.QueryUser(func(u *entity.User) bool {
-		return u.GetName() == username
+	user := entity.QueryUser(func(a *entity.User) bool {
+		if a.M_name == username {
+			return true
+		} else {
+			return false
+		}
 	})
 
-	if len(user) == 1 {
+	if len(user) == 0 {
+		entity.CreateUser(&entity.User{username, password, email, phone})
+		if err := entity.Sync(); err != nil {
+			return false, err
+		}
+		return true, nil
+	} else {
 		errLog.Println("User Register: Already exist username")
 		return false, nil
 	}
-
-	entity.CreateUser(&entity.User{username, password, email, phone})
-
-	if err := entity.Sync(); err != nil {
-
-		return true, err
-
-	}
-	return true, nil
 }
 
 func DeleteUser(username string) bool {
