@@ -24,7 +24,7 @@ var registerCmd = &cobra.Command{
 		email, _ := cmd.Flags().GetString("email")
 		phonenumber, _ := cmd.Flags().GetString("telephone")
 		//查看本账户是否已经被注册过
-		fmt.Println("register called by " + username + password + email + phonenumber)
+		//fmt.Println("register called by " + username + password + email + phonenumber)
 		register(username, password, email, phonenumber)
 	},
 }
@@ -48,7 +48,7 @@ func init() {
 
 func register(username string, password string, email string, phonenumber string) {
 	if username == "" || password == "" || email == "" || phonenumber == "" {
-		fmt.Println("Please tell us your username[-u], password[-p], email[-e], telephone[-t]")
+		fmt.Println("Please input command like: agenda register -u A -p 12345678 -e 123@123 -t 12345678")
 		return
 	}
 
@@ -59,7 +59,7 @@ func register(username string, password string, email string, phonenumber string
 			return
 		} else {
 			if err != nil {
-				fmt.Println("Some unexpected error happened when try to record your info,Please read error.log for detail")
+				fmt.Println("Some error happened when try to record your info,Please read error.log for detail")
 				return
 			} else {
 				fmt.Println("Successfully register!")
@@ -94,7 +94,7 @@ func isValidEmail(e string) bool {
 	val, _ := regexp.Match("\\w*@\\w*\\.w*", b)
 
 	if !val {
-		fmt.Println("email is invaild")
+		fmt.Println("email is invaild, must like XXX@XXX.XXX")
 	}
 	return val
 }
@@ -104,7 +104,7 @@ func isValidPhone(p string) bool {
 	val, _ := regexp.Match("[0-9]+", b)
 
 	if !val {
-		fmt.Println("phone is invaild")
+		fmt.Println("phone is invaild, please input again")
 	}
 	return val
 }

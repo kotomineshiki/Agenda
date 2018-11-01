@@ -26,18 +26,21 @@ var addparticipatorCmd = &cobra.Command{
 	Use:   "addparticipator",
 	Short: "add participators",
 	Long: `add participators to a meeting by meeting's name ,just like:
-	agenda addparticipator -t meetingtitle -p "a, b"`,
+	agenda addparticipator -t meetingtitle -p [\"a, b\"]`,
 	Args: cobra.MinimumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
-		username, _ := cmd.Flags().GetStringSlice("participator")
 		meetingtitle, _ := cmd.Flags().GetString("title")
+		username, _ := cmd.Flags().GetStringSlice("participator")
 		if len(username) == 0 || meetingtitle == "" {
-			fmt.Println("Please input title and participator(s)(input like \"name1, name2\")")
+			fmt.Println("Please input commend like, aaddparticipator -t [meetingtitle] -p [\"name1, name2\"])")
 			return
 		}
 		//fmt.Println("addparticipator called")
 		if user, flag := service.GetCurUser(); flag != true {
-			fmt.Println("Please login firstly")
+			fmt.Println("[Error]")
+			fmt.Println("Cmd addparticipator failed")
+			fmt.Println("Not log in yet")
+			fmt.Println("Please Log in firstly!")
 		} else {
 			// participators := strings.Split(tmp_p,",")
 			flag := service.AddMeetingParticipator(user.GetName(), meetingtitle, username)
@@ -45,6 +48,7 @@ var addparticipatorCmd = &cobra.Command{
 				fmt.Println("Unexpected error. Check error.log for detail")
 			} else {
 				fmt.Println("Successfully add")
+				fmt.Println("Current user: ", user.GetName())
 			}
 		}
 	},
@@ -52,8 +56,8 @@ var addparticipatorCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(addparticipatorCmd)
-	addparticipatorCmd.Flags().StringSliceP("participator", "p", nil, "participator(s) you want to add, input like \"name1, name2\"")
 	addparticipatorCmd.Flags().StringP("title", "t", "", "the title of meeting")
+	addparticipatorCmd.Flags().StringSliceP("participator", "p", nil, "participator(s) you want to add, input like \"name1, name2\"")
 	// Here you will define your flags and configuration settings.
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
@@ -63,3 +67,32 @@ func init() {
 	// is called directly, e.g.:
 	// addparticipatorCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
+
+/*
+func isParticipatorinList(name string, participators []string) bool {
+	for _, j := range participators {
+		if name == j {
+			return true
+		}
+	}
+	return false
+}
+func isParticipatorExist(name string, participators []entity.User) bool {
+	for _, j := range participators {
+		if name == j.Name {
+			return true
+		}
+	}
+	return false
+}
+func isParticipatorExistinMeeting(name string, meeting entity.Meeting) bool {
+	if name == meeting.Sponsor {
+		return true
+	}
+	for _, j := range meeting.Participators {
+		if name == j {
+			return true
+		}
+	}
+	return false
+}*/

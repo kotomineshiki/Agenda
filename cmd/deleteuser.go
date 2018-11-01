@@ -15,26 +15,30 @@
 package cmd
 
 import (
-	"Agenda/service"
 	"fmt"
 
 	"github.com/spf13/cobra"
+
+	"Agenda/service"
 )
 
 // deleteuserCmd represents the deleteuser command
 var deleteuserCmd = &cobra.Command{
 	Use:   "deleteuser",
-	Short: "A brief description of your command",
+	Short: "delete a user",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("deleteuser called")
+		//fmt.Println("deleteuser called")
 		user, flag := service.GetCurUser()
 		if flag != true {
-			fmt.Println("Please Log in firstly")
+			fmt.Println("[Error]")
+			fmt.Println("Cmd deleteuser failed")
+			fmt.Println("Not log in yet")
+			fmt.Println("Please Log in firstly!")
 		} else {
 			if service.DeleteUser(user.M_name) {
 				fmt.Println("[delete agenda account] succeed!")
 			} else {
-				fmt.Println("[delete agenda account] error!")
+				fmt.Println("delete Wrong! more error message please read error.log for detail")
 			}
 		}
 	},

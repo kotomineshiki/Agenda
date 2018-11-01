@@ -10,16 +10,26 @@ import (
 
 // loginCmd represents the login command
 var loginCmd = &cobra.Command{
-	Use:   "login -u [UserName] -p [PassWord]",
-	Short: "通过UserName和Password 进行登录",
-	Long: `使用 UserName 和 PassWord 来登录Agenda:
-如果密码正确，你可以登录，否则必须登记另外一个用户才能使用Agenda`,
+	Use:   "login",
+	Short: "log in a user ",
+	Long: `use username and passward to login ,just like:
+	Agenda login -u [UserName] -p [PassWord]`,
 	Run: func(cmd *cobra.Command, args []string) {
-		//entity读取当前用户？
 		username, _ := cmd.Flags().GetString("username")
 		password, _ := cmd.Flags().GetString("password")
-		fmt.Println("login called " + username + " " + password)
-		login(username, password)
+		//fmt.Println("login called " + username + " " + password)
+		if username == "" || password == "" {
+			fmt.Println("Please input like,login -u [UserName] -p [PassWord]")
+			return
+		}
+		if isValidName(username) && isValidPassword(password) {
+			if service.UserLogin(username, password) {
+				fmt.Println("[log in] succeed!")
+				fmt.Println("Current user:", username)
+			} else {
+				fmt.Println("login failed, may be Password error or user doesn't exist")
+			}
+		}
 	},
 }
 
@@ -37,14 +47,25 @@ func init() {
 	// is called directly, e.g.:
 	// loginCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
-func login(username string, password string) {
-	if username == "" || password == "" {
-		fmt.Println("Please tell us your username[-u], password[-p]")
-		return
+
+/*func isValidName(n string) bool {
+	b := []byte(n)
+	val, _ := regexp.Match(".+", b)
+	if !val {
+		fmt.Println("flag -n ,name is invaild")
 	}
-	if service.UserLogin(username, password) {
-		fmt.Println("[log in] succeed!")
-	} else {
-		fmt.Println("[log in] Password error or user doesn't exist")
-	}
+	return val
 }
+
+func isValidPassword(p string) bool {
+	b := []byte(p)
+	val, _ := regexp.Match(".+", b)
+	if len(p) < 8 {
+		fmt.Println("The password must be longer than 8 digits")
+		val = false
+	}
+	if !val {
+		fmt.Println("flag -p ,password is invaild")
+	}
+	return val
+}*/

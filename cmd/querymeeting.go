@@ -25,29 +25,29 @@ import (
 // querymeetingCmd represents the querymeeting command
 var querymeetingCmd = &cobra.Command{
 	Use:   "querymeeting",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "query meetings from starttime to endtime ",
+	Long: `query meetings from starttime to endtime, just like:
+	Agenda querymeeting -s [yyyy-mm-dd/hh:mm] -e [yyyy-mm-dd/hh:mm]`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("querymeeting called")
+		//fmt.Println("querymeeting called")
 		starttime, _ := cmd.Flags().GetString("starttime")
 		endtime, _ := cmd.Flags().GetString("endtime")
 		if starttime == "" || endtime == "" {
-			fmt.Println("querymeeting -s [starttime] -e [endtime]")
+			fmt.Println("querymeeting -s [yyyy-mm-dd/hh:mm] -e [yyyy-mm-dd/hh:mm]")
 			return
 		}
 		user, flag := service.GetCurUser()
 		if flag != true {
-			fmt.Println("Please Log in firstly")
+			fmt.Println("[Error]")
+			fmt.Println("Cmd querymeeting failed")
+			fmt.Println("Not log in yet")
+			fmt.Println("Please Log in firstly!")
 			return
 		}
-		temp_mets, flag := service.QueryMeeting(user.M_name, starttime, endtime)
-		fmt.Println(len(temp_mets))
+		meetings, flag := service.QueryMeeting(user.M_name, starttime, endtime)
+		//fmt.Println(len(meetings))
 		if flag == true {
+<<<<<<< HEAD
 			for _, m := range temp_mets {
 				fmt.Println("----------------")
 				fmt.Println("Title: ", m.M_title)
@@ -59,12 +59,29 @@ to quickly create a Cobra application.`,
 				fmt.Printf("Participator(s): ")
 				for _, p := range m.M_participators {
 					fmt.Printf(p + " ")
+=======
+			if len(meetings) == 0 {
+				fmt.Println("congratulations! You don't have any meetings")
+			} else {
+				for _, m := range meetings {
+					fmt.Println("----------------")
+					fmt.Println("Title: ", m.M_title)
+					ts, _ := entity.DateToString(m.M_startDate)
+					fmt.Println("Start Time", ts)
+					te, _ := entity.DateToString(m.M_endDate)
+					fmt.Println("End Time", te)
+					fmt.Printf("Participator(s): ")
+					for _, p := range m.M_participators {
+						fmt.Printf(p + " ")
+					}
+					fmt.Printf("\n")
+					fmt.Println("----------------")
+>>>>>>> d4881b3b0e10287eef4ff72c502a2c0e6cf269fb
 				}
-				fmt.Printf("\n")
-				fmt.Println("----------------")
 			}
 		} else {
-			fmt.Println("Wrong Date!please input the date as yyyy-mm-dd/hh:mm and make sure that starttiem <= endtime")
+			fmt.Println("query meetings failed!")
+			fmt.Println("Please check your input the date as yyyy-mm-dd/hh:mm and make sure that starttiem <= endtime")
 		}
 	},
 }
