@@ -211,9 +211,9 @@ func QueryUser(filter UserFilter) []User {
 
 func UpdateUser(filter UserFilter, switcher func(*User)) int {
 	count := 0
-	for _, it := range userData {
-		if filter(&it) {
-			switcher(&it)
+	for i := 0; i < len(userData); i++ {
+		if temp := &userData[i]; filter(temp) {
+			switcher(temp)
 			count++
 		}
 	}
@@ -225,10 +225,12 @@ func UpdateUser(filter UserFilter, switcher func(*User)) int {
 
 func DeleteUser(filter UserFilter) int {
 	count := 0
+	u_l := len(userData)
 	for i := 0; i < len(userData); {
 		if filter(&userData[i]) {
-			userData[i] = userData[len(userData)]
-			userData = userData[:len(userData)]
+			u_l--
+			userData[i] = userData[u_l]
+			userData = userData[:u_l]
 			count++
 		} else {
 			i++
@@ -240,7 +242,7 @@ func DeleteUser(filter UserFilter) int {
 	return count
 }
 func CreateMeeting(v *Meeting) {
-	meetingData = append(meetingData, (*v))
+	meetingData = append(meetingData, deepcopy.Copy(*v).(Meeting))
 	dirty = true
 }
 func QueryMeeting(filter MeetingFilter) []Meeting {
@@ -254,9 +256,9 @@ func QueryMeeting(filter MeetingFilter) []Meeting {
 }
 func UpdateMeeting(filter MeetingFilter, switcher func(*Meeting)) int {
 	count := 0
-	for _, it := range meetingData {
-		if filter(&it) {
-			switcher(&it)
+	for i := 0; i < len(meetingData); i++ {
+		if temp := &meetingData[i]; filter(temp) {
+			switcher(temp)
 			count++
 		}
 	}
@@ -267,10 +269,12 @@ func UpdateMeeting(filter MeetingFilter, switcher func(*Meeting)) int {
 }
 func DeleteMeeting(filter MeetingFilter) int {
 	count := 0
+	m_l := len(meetingData)
 	for i := 0; i < len(meetingData); {
 		if filter(&meetingData[i]) {
-			meetingData[i] = meetingData[len(meetingData)]
-			meetingData = meetingData[:len(meetingData)]
+			m_l--
+			meetingData[i] = meetingData[m_l]
+			meetingData = meetingData[:m_l]
 			count++
 		} else {
 			i++

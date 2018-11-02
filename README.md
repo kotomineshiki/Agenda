@@ -19,7 +19,7 @@
 
 ## 相关命令
 
-![]()
+![命令显示](https://github.com/kotomineshiki/Agenda/blob/master/Picture/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-11-02%20%E4%B8%8A%E5%8D%8810.18.32.png?raw=true)
 
 上图是本项目所包含的所有命令的简单介绍，可以用`./Agenda help`来查看，具体命令介绍如下：
 
@@ -45,7 +45,7 @@
 
 * 使用截图
 
-![]()
+![register](https://github.com/kotomineshiki/Agenda/blob/master/Picture/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-11-02%20%E4%B8%8A%E5%8D%8810.38.34.png?raw=true)
 
 ### login
 
@@ -66,7 +66,7 @@
 ```
 * 使用截图
 
-![]()
+![login](https://github.com/kotomineshiki/Agenda/blob/master/Picture/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-11-02%20%E4%B8%8A%E5%8D%8810.49.41.png?raw=true)
 
 ### logout
 
@@ -86,7 +86,7 @@
 
 * 使用截图
 
-![]()
+![logout](https://github.com/kotomineshiki/Agenda/blob/master/Picture/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-11-02%20%E4%B8%8A%E5%8D%8810.50.24.png?raw=true)
 
 ### queryuser
 
@@ -106,7 +106,7 @@
 
 * 使用截图
 
-![]()
+![queryuser](https://github.com/kotomineshiki/Agenda/blob/master/Picture/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-11-02%20%E4%B8%8A%E5%8D%8810.51.32.png?raw=true)
 
 ### deleteuser
 
@@ -152,6 +152,8 @@
 
 * 使用截图
 
+![createmeeting](https://github.com/kotomineshiki/Agenda/blob/master/Picture/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-11-02%20%E4%B8%8A%E5%8D%8811.11.54.png?raw=true)
+
 ### addparticipator
 
 >* 增加参与者，已登录的用户可以增加自己发起会议的参与者。要求提供会议名称和添加的参与者
@@ -172,7 +174,7 @@
 
 * 使用截图
 
-![]()
+![addparticipator](https://github.com/kotomineshiki/Agenda/blob/master/Picture/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-11-02%20%E4%B8%8A%E5%8D%8811.13.05.png?raw=true)
 
 ### removeparticipator
 
@@ -258,9 +260,6 @@
 
 ```
 
-* 使用截图
-
-![]()
 
 ### querymeeting
 
@@ -280,7 +279,4 @@
   -s, --starttime string   starttime of time interval
 ```
 
-* 使用截图
-
-![]()
 

@@ -30,7 +30,7 @@ var removeparticipatorCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		title, _ := cmd.Flags().GetString("title")
 		participator, _ := cmd.Flags().GetStringSlice("participator")
-		fmt.Println("removeparticipator called")
+		//fmt.Println("removeparticipator called")
 		if title == "" || len(participator) == 0 {
 			fmt.Println("Please input command like: removeparticipator -t [title] -p [\"name1, name2\"]")
 			return
