@@ -84,3 +84,6 @@ ERROR: 2018/11/02 14:02:03 log.go:85: Start up Error log
 ERROR: 2018/11/02 14:02:39 log.go:85: Start up Error log
 ERROR: 2018/11/02 14:03:08 log.go:85: Start up Error log
 ERROR: 2018/11/02 14:03:08 agendaservice.go:45: Login: User not Exist
+ERROR: 2018/11/02 14:32:36 log.go:85: Start up Error log
+ERROR: 2018/11/02 14:33:03 log.go:85: Start up Error log
+ERROR: 2018/11/02 14:33:22 log.go:85: Start up Error log

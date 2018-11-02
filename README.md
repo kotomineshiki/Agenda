@@ -127,7 +127,7 @@
 
 * 使用截图
 
-![]()
+![deleteuser](https://github.com/kotomineshiki/Agenda/blob/master/Picture/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-11-02%20%E4%B8%8B%E5%8D%882.03.17.png?raw=true)
 
 
 ### createMeeting
@@ -197,7 +197,7 @@
 
 * 使用截图
 
-![]()
+![removeparticipator](https://github.com/kotomineshiki/Agenda/blob/master/Picture/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-11-02%20%E4%B8%8B%E5%8D%881.57.05.png?raw=true)
 
 ### deleteMeeting 
 
@@ -219,7 +219,7 @@
 
 * 使用截图
 
-![]()
+![deleteMeeting](https://github.com/kotomineshiki/Agenda/blob/master/Picture/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-11-02%20%E4%B8%8B%E5%8D%882.01.35.png?raw=true)
 
 
 ### clearmeeting
@@ -239,7 +239,7 @@
 
 * 使用截图
 
-![]()
+![clearmeeting](https://github.com/kotomineshiki/Agenda/blob/master/Picture/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-11-02%20%E4%B8%8B%E5%8D%882.02.17.png?raw=true)
 
 
 ### quitmeeting
