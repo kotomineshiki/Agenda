@@ -279,4 +279,7 @@
   -s, --starttime string   starttime of time interval
 ```
 
+* 使用截图
+
+![querymeeting](https://github.com/kotomineshiki/Agenda/blob/master/Picture/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-11-02%20%E4%B8%8B%E5%8D%881.52.37.png?raw=true)
 
